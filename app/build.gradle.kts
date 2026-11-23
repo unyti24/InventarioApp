@@ -44,6 +44,7 @@ dependencies {
     val lifecycleVersion = "2.11.1"
     val navigation3Version = "1.2.2"
     val hiltVersion = "2.60.1"
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.material3)
@@ -59,8 +60,6 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
-    implementation("com.google.dagger:hilt-android:2.60.1")
-    ksp("com.google.dagger:hilt-compiler:2.60.1")
 
     // Lifecycle
     implementation("androidx.lifecycle:lifecycle-runtime-compose:$lifecycleVersion")
