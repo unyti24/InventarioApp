@@ -4,7 +4,6 @@ plugins {
 
     id("com.google.dagger.hilt.android")
     id("com.google.devtools.ksp")
-    id("com.google.gms.google-services")
 }
 
 android {
@@ -41,6 +40,10 @@ android {
 }
 
 dependencies {
+    val roomVersion = "2.8.5"
+    val lifecycleVersion = "2.11.1"
+    val navigation3Version = "1.2.2"
+    val hiltVersion = "2.60.1"
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.material3)
@@ -58,4 +61,32 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     implementation("com.google.dagger:hilt-android:2.60.1")
     ksp("com.google.dagger:hilt-compiler:2.60.1")
+
+    // Lifecycle
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:$lifecycleVersion")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-navigation3:$lifecycleVersion")
+
+// Navigation 3
+    implementation("androidx.navigation3:navigation3-runtime:$navigation3Version")
+    implementation("androidx.navigation3:navigation3-ui:$navigation3Version")
+
+// Hilt
+    implementation("androidx.hilt:hilt-lifecycle-viewmodel-compose:1.4.0")
+    implementation("com.google.dagger:hilt-android:$hiltVersion")
+    ksp("com.google.dagger:hilt-compiler:$hiltVersion")
+
+// Room
+    implementation("androidx.room:room-runtime:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+    ksp("androidx.room:room-compiler:$roomVersion")
+
+// Firebase
+    implementation(platform("com.google.firebase:firebase-bom:35.2.0"))
+    implementation("com.google.firebase:firebase-firestore")
+    implementation("com.google.firebase:firebase-auth")
+
+// Coroutines y Serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.11.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.12.0")
 }
