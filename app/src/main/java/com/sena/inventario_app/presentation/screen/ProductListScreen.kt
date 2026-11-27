@@ -68,7 +68,8 @@ fun ProductListScreen(
             },
             onDelete = { product ->
                 productToDelete = product
-            }
+            },
+            modifier = Modifier.weight(1f)
         )
     }
 

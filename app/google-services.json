@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "47024975812",
+    "project_id": "inventarioapp-91902",
+    "storage_bucket": "inventarioapp-91902.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:47024975812:android:7a05829fd77acaa0393e91",
+        "android_client_info": {
+          "package_name": "com.sena.inventario_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAentrlODFkBuNEYckXWFnGw30yHhU-uHQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

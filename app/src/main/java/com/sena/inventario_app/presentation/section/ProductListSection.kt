@@ -16,15 +16,17 @@ import com.sena.inventario_app.presentation.composables.ProductCard
 fun ProductListSection(
     products: List<Product>,
     onEdit: (Product) -> Unit,
-    onDelete: (Product) -> Unit
+    onDelete: (Product) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     if (products.isEmpty()) {
         Text(
             text = "No hay productos registrados.",
-            modifier = Modifier.padding(16.dp)
+            modifier = modifier.padding(16.dp)
         )
     } else {
         LazyColumn(
+            modifier = modifier,
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             items(
