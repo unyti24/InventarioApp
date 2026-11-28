@@ -5,25 +5,28 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import dagger.hilt.android.AndroidEntryPoint
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.sena.inventario_app.presentation.screen.AppNavigation
+import com.sena.inventario_app.presentation.viewmodel.AuthViewModel
 import com.sena.inventario_app.ui.theme.Inventario_appTheme
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         setContent {
             Inventario_appTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                Surface(modifier = Modifier.fillMaxSize()) {
+                    AuthCheck()
                 }
             }
         }
@@ -31,17 +34,19 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+fun AuthCheck(
+    viewModel: AuthViewModel = hiltViewModel()
+) {
+    val uid by viewModel.uid.collectAsState()
+    val error by viewModel.error.collectAsState()
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    Inventario_appTheme {
-        Greeting("Android")
+    if (uid != null) {
+        AppNavigation()
+    } else if (error != null) {
+        androidx.compose.material3.Text(
+            text = "Error de Firebase: $error"
+        )
+    } else {
+        androidx.compose.material3.CircularProgressIndicator()
     }
 }
