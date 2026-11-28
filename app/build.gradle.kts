@@ -5,6 +5,8 @@ plugins {
     id("com.google.dagger.hilt.android")
     id("com.google.devtools.ksp")
     kotlin("plugin.serialization") version "2.1.10"
+
+    id("com.google.gms.google-services")
 }
 
 android {
