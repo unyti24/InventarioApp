@@ -21,9 +21,7 @@ fun ProductFormScreen(
     viewModel: ProductFormViewModel = hiltViewModel()
 ) {
     LaunchedEffect(productId) {
-        if (productId != null) {
-            viewModel.loadProduct(productId)
-        }
+        viewModel.setupForm(productId)
     }
 
     Column(

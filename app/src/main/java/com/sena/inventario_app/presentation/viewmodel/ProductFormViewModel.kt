@@ -7,6 +7,8 @@ import com.sena.inventario_app.domain.repository.ProductRepository
 import com.sena.inventario_app.domain.usecase.SaveProductUseCase
 import com.sena.inventario_app.presentation.state.ProductFormUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -16,8 +18,23 @@ class ProductFormViewModel @Inject constructor(
     private val saveProductUseCase: SaveProductUseCase
 ) : ViewModel() {
 
-    private val _ui = kotlinx.coroutines.flow.MutableStateFlow(ProductFormUiState())
-    val ui = _ui
+    private val _ui = MutableStateFlow(ProductFormUiState())
+    val ui: StateFlow<ProductFormUiState> = _ui
+
+    private var currentProductId: String? = null
+
+    fun setupForm(productId: String?) {
+        if (productId != null) {
+            loadProduct(productId)
+        } else {
+            resetForm()
+        }
+    }
+
+    fun resetForm() {
+        currentProductId = null
+        _ui.value = ProductFormUiState()
+    }
 
     fun updateName(value: String) {
         _ui.value = _ui.value.copy(name = value)
@@ -42,7 +59,7 @@ class ProductFormViewModel @Inject constructor(
             val product = repository.findById(productId)
 
             if (product != null) {
-                _ui.value = _ui.value.copy(
+                _ui.value = ProductFormUiState(
                     name = product.name,
                     description = product.description,
                     price = product.priceCop.toString(),
@@ -96,6 +113,4 @@ class ProductFormViewModel @Inject constructor(
             }
         }
     }
-
-    private var currentProductId: String? = null
 }
